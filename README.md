@@ -100,6 +100,8 @@ _TBD_
 ## What I would do with more time
 
 - Move to ESLint 10 once `eslint-plugin-jsx-a11y` declares support for it.
+- Edit and delete posts (`PUT`/`PATCH`/`DELETE /posts/:id`) and post comments
+  (`/posts/:id/comments`). These are intentionally out of scope; see `specs/api-contract.md`.
 
 ## Known limitations
 

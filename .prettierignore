@@ -3,3 +3,5 @@ coverage
 playwright-report
 test-results
 package-lock.json
+# Captured verbatim from the live API; see specs/api-contract.md
+src/test/fixtures/*.json
