@@ -11,6 +11,7 @@ beforeAll(() => {
 afterEach(() => {
   cleanup()
   server.resetHandlers()
+  server.events.removeAllListeners()
   window.history.replaceState(null, '', '/')
 })
 
