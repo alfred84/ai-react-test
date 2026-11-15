@@ -2,9 +2,68 @@
 @import '@fontsource-variable/inter';
 
 /*
- * Design tokens. Minimal baseline; the full palette, radius and
- * dark-mode surfaces are defined alongside the UI primitives.
+ * Semantic color tokens. Raw values live only here; components use the
+ * generated utilities (bg-surface, text-fg-muted, ring-accent, ...).
+ * Text/background pairs meet WCAG 2.2 AA in both schemes.
  */
-@theme {
+:root {
+  color-scheme: light dark;
+
+  --canvas: #f8fafc;
+  --surface: #ffffff;
+  --surface-muted: #f1f5f9;
+  --border: #e2e8f0;
+  --fg: #0f172a;
+  --fg-muted: #475569;
+  --accent: #4f46e5;
+  --accent-fg: #ffffff;
+  --accent-subtle: #eef2ff;
+  --danger: #b91c1c;
+  --danger-subtle: #fef2f2;
+  --success: #15803d;
+  --success-subtle: #f0fdf4;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --canvas: #020617;
+    --surface: #0f172a;
+    --surface-muted: #1e293b;
+    --border: #334155;
+    --fg: #f1f5f9;
+    --fg-muted: #94a3b8;
+    --accent: #818cf8;
+    --accent-fg: #020617;
+    --accent-subtle: #1e1b4b;
+    --danger: #f87171;
+    --danger-subtle: #450a0a;
+    --success: #4ade80;
+    --success-subtle: #052e16;
+  }
+}
+
+@theme inline {
   --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-border: var(--border);
+  --color-fg: var(--fg);
+  --color-fg-muted: var(--fg-muted);
+  --color-accent: var(--accent);
+  --color-accent-fg: var(--accent-fg);
+  --color-accent-subtle: var(--accent-subtle);
+  --color-danger: var(--danger);
+  --color-danger-subtle: var(--danger-subtle);
+  --color-success: var(--success);
+  --color-success-subtle: var(--success-subtle);
+
+  --radius-card: 0.75rem;
+}
+
+@layer base {
+  body {
+    @apply bg-canvas font-sans text-fg antialiased;
+  }
 }

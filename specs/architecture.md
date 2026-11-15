@@ -143,7 +143,7 @@ request<T>(path: string, schema: ZodType<T>, init?: { method?: 'GET' | 'POST'; b
 ### Render errors
 
 A small class-based `AppErrorBoundary` at the app root catches unexpected render errors. It shows
-a friendly message with a "Reload" button and logs to `console.error`. Async errors never reach it
+a friendly message with a "Reload page" link and logs to `console.error`. Async errors never reach it
 because they are handled as query state.
 
 ## Performance
