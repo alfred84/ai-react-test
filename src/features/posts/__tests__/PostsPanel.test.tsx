@@ -80,7 +80,7 @@ describe('PostsPanel', () => {
 
     await publish(user, 'Hello', 'World')
 
-    expect(await screen.findByRole('status')).toHaveTextContent('Post published')
+    expect(await screen.findByText('Post published')).toHaveAttribute('role', 'status')
     const [firstArticle] = screen.getAllByRole('article')
     if (!firstArticle) throw new Error('expected a first post')
     expect(within(firstArticle).getByRole('heading', { level: 3, name: 'Hello' })).toBeVisible()

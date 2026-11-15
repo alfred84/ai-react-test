@@ -7,7 +7,9 @@ import { ErrorState } from '@/shared/ui/ErrorState'
 import { Skeleton } from '@/shared/ui/Skeleton'
 
 import { usePosts } from '../hooks/usePosts'
-import { PostList } from './PostList'
+import { useCreatedPostsStore } from '../state/createdPostsContext'
+import { CreatePostForm } from './CreatePostForm'
+import { PostList, type ListedPost } from './PostList'
 
 export type PostsAuthor = { id: number; name: string }
 
@@ -19,7 +21,10 @@ export type PostsPanelProps = {
 
 const panelClasses = 'flex flex-col gap-4 rounded-card border border-border bg-surface p-4'
 
-/** Detail side of the master-detail layout: the selected user's posts (UP-01..05). */
+/**
+ * Detail side of the master-detail layout: the create form and the selected user's posts,
+ * created ones first (UP-01..05, CP-07).
+ */
 export function PostsPanel({ user, onBack }: PostsPanelProps) {
   const headingId = useId()
 
@@ -42,6 +47,16 @@ export function PostsPanel({ user, onBack }: PostsPanelProps) {
 function UserPosts({ user, onBack }: { user: PostsAuthor; onBack?: (() => void) | undefined }) {
   const headingId = useId()
   const postsQuery = usePosts(user.id)
+  const createdPosts = useCreatedPostsStore().postsByUser[user.id] ?? []
+  const posts: ListedPost[] = [
+    ...createdPosts.map(({ key, title, body }) => ({ key, title, body, isNew: true })),
+    ...(postsQuery.data ?? []).map(({ id, title, body }) => ({
+      key: `server-${String(id)}`,
+      title,
+      body,
+      isNew: false,
+    })),
+  ]
 
   return (
     <section aria-labelledby={headingId} aria-busy={postsQuery.isPending} className={panelClasses}>
@@ -56,6 +71,8 @@ function UserPosts({ user, onBack }: { user: PostsAuthor; onBack?: (() => void) 
           </Button>
         )}
       </div>
+
+      <CreatePostForm key={user.id} userId={user.id} />
 
       <p role="status" className="sr-only">
         {postsQuery.isPending ? 'Loading posts…' : ''}
@@ -84,11 +101,11 @@ function UserPosts({ user, onBack }: { user: PostsAuthor; onBack?: (() => void) 
       )}
 
       {postsQuery.isSuccess &&
-        (postsQuery.data.length > 0 ? (
-          <PostList posts={postsQuery.data} />
+        (posts.length > 0 ? (
+          <PostList posts={posts} />
         ) : (
           <EmptyState icon={NotebookPen} title={`${user.name} hasn't posted yet`}>
-            Their posts will show up here.
+            Write their first post with the form above.
           </EmptyState>
         ))}
     </section>

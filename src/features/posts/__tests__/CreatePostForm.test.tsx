@@ -98,7 +98,7 @@ describe('CreatePostForm', () => {
 
     expect(await screen.findByRole('button', { name: 'Publishing…' })).toBeDisabled()
     expect(screen.getByRole('form', { name: 'New post' })).toHaveAttribute('aria-busy', 'true')
-    expect(await screen.findByRole('status')).toHaveTextContent('Post published')
+    expect(await screen.findByText('Post published')).toHaveAttribute('role', 'status')
     expect(sentBody).toEqual({ title: 'Hello', body: 'World', userId: 1 })
     expect(contentType).toMatch(/^application\/json/)
     expect(getTitle()).toHaveValue('')
@@ -121,7 +121,7 @@ describe('CreatePostForm', () => {
 
     await user.click(screen.getByRole('button', { name: 'Publish' }))
 
-    expect(await screen.findByRole('status')).toHaveTextContent('Post published')
+    expect(await screen.findByText('Post published')).toHaveAttribute('role', 'status')
     expect(screen.queryByRole('alert')).not.toBeInTheDocument()
   })
 
