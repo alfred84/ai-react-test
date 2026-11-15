@@ -1,14 +1,27 @@
 # API contract: JSONPlaceholder
 
+- **Contract version:** 1.0.1 (see [Changelog](#changelog))
 - **Status:** Approved
-- **Base URL:** `https://jsonplaceholder.typicode.com`
-- **Verified:** 2026-11-15 with `curl` against the live API and the
-  [official guide](https://jsonplaceholder.typicode.com/guide/).
+- **Base URL:** `https://jsonplaceholder.typicode.com` (**https only**; the client never builds
+  `http://` URLs)
+- **Verified:** 2026-11-15 with `curl` against the live API.
 
-Every statement below was observed with a real request. Nothing is inferred. If the
-API changes, re-run the probes in [Re-verification](#re-verification) and update this file first.
+## Sources
 
-## Endpoints used
+1. **Official guide** ([jsonplaceholder.typicode.com/guide](https://jsonplaceholder.typicode.com/guide/)):
+   input for the create, filter and nested-route behavior. It documents that
+   `POST /posts` with `{ title, body, userId }` returns the same payload plus `id: 101`, that
+   "the resource is not really created on the server", that `/posts?userId=1` filters by user,
+   and that `/users/1/posts` is an available nested route.
+2. **Live probes with `curl`**: the source of truth. Every endpoint in scope was requested,
+   including **`GET /users`, whose shape the guide does not show**. Where the guide and the API
+   agree, both are cited. Where the guide is silent (user shape, headers, CORS, unknown ids,
+   error bodies), only observed behavior is documented.
+
+If the API changes, re-run the probes in [Re-verification](#re-verification), update this file
+first, and bump the contract version.
+
+## Endpoints in scope
 
 | ID     | Method | Path                | Purpose                       |
 | ------ | ------ | ------------------- | ----------------------------- |
@@ -16,7 +29,17 @@ API changes, re-run the probes in [Re-verification](#re-verification) and update
 | API-02 | GET    | `/posts?userId=:id` | Load the posts of one user    |
 | API-03 | POST   | `/posts`            | Create a post (not persisted) |
 
-No other endpoint is used. Pagination, `_limit`, `_sort` and nested expansions are out of scope.
+## Out of scope
+
+The guide lists more routes. They are reference only and **must not be implemented**:
+
+- `GET /posts/:id`, `GET /posts` (unfiltered), `PUT`/`PATCH`/`DELETE /posts/:id` (edit and delete
+  posts)
+- `/comments`, `/posts/:id/comments`, `/albums`, `/photos`, `/todos` and the other nested routes
+- Any query parameter other than `userId`, such as pagination or sorting. Neither the guide nor
+  our probes cover them, so the app does not rely on them.
+
+Edit, delete and comments are listed under "What I would do with more time" in the README.
 
 ## API-01 `GET /users`
 
@@ -63,7 +86,9 @@ DuBuque.
 
 - `200 OK`, JSON, `Cache-Control: max-age=43200`.
 - **10 posts per user** for every user 1..10, 100 posts in total, ids `1..100`.
-- Shape: `{ userId: number, id: number, title: string, body: string }`.
+- Shape: `{ userId: number, id: number, title: string, body: string }`. The post text field is
+  **`body`**, not `content` or `text`. The guide's example for `GET /posts/1` matches the observed
+  shape and values exactly.
 - Observed lengths across all 100 posts: `title` 12-79 chars, `body` 102-225 chars.
 - **Every `body` contains `\n` line breaks**, so the UI must preserve them, for example with
   `white-space: pre-line`.
@@ -153,8 +178,10 @@ Findings:
 - **Malformed JSON returns `500` with a `text/html` body** containing a stack trace. The client
   must not assume error bodies are JSON.
 
-Consequence for the app: the server `id` (101) cannot be used as a list key or identity. Created
-posts get a client-generated id. The local merge strategy is in
+Consequence for the app: the server `id` (101) cannot be used as a list key or identity. Every
+locally created post gets a **unique client-generated id** that cannot collide with server ids
+(numbers 1-100) or with other created posts. Created posts are then **merged into the user's
+list without collisions**. The id format and merge strategy are defined in
 [architecture](architecture.md#created-posts).
 
 ## Headers and CORS
@@ -213,3 +240,14 @@ curl -s -i -X POST https://jsonplaceholder.typicode.com/posts \
   -d '{"title":"t","body":"b","userId":1}'                                       # 201, id 101
 curl -s -o /dev/null -w '%{http_code}\n' https://jsonplaceholder.typicode.com/posts/101  # 404
 ```
+
+## Changelog
+
+The contract is versioned with the code. Any change to endpoints, shapes or schemas bumps the
+version: major for breaking shape changes, minor for new fields or endpoints, patch for
+clarifications.
+
+| Version | Date       | Change                                                                                                                                                |
+| ------- | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1.0.0   | 2026-11-15 | Initial contract for API-01..03, verified with `curl`.                                                                                                |
+| 1.0.1   | 2026-11-15 | Clarifications only: official guide cited as a source, https-only rule, explicit out-of-scope routes, `body` as the text field, client-id merge rule. |
