@@ -101,17 +101,20 @@ small enough to keep cards readable.
 
 ## Traceability
 
-| ID           | Test file                                                 | Test name                                            | Status  |
-| ------------ | --------------------------------------------------------- | ---------------------------------------------------- | ------- |
-| CP-01        | `src/features/posts/__tests__/CreatePostForm.test.tsx`    | `CP-01 renders title, body and publish`              | Planned |
-| CP-02        | `src/features/posts/schemas/createPostFormSchema.test.ts` | `CP-02 rejects empty and whitespace-only values`     | Planned |
-| CP-03        | `src/features/posts/schemas/createPostFormSchema.test.ts` | `CP-03 enforces max lengths after trimming`          | Planned |
-| CP-04        | `src/features/posts/__tests__/CreatePostForm.test.tsx`    | `CP-04 shows accessible errors on blur and submit`   | Planned |
-| CP-05        | `src/features/posts/__tests__/CreatePostForm.test.tsx`    | `CP-05 sends trimmed values with the user id`        | Planned |
-| CP-06        | `src/features/posts/__tests__/CreatePostForm.test.tsx`    | `CP-06 disables publish while pending`               | Planned |
-| CP-07        | `src/features/posts/__tests__/PostsPanel.test.tsx`        | `CP-07 shows the new post first with a badge`        | Planned |
-| CP-08        | `src/features/posts/__tests__/PostsPanel.test.tsx`        | `CP-08 keeps posts with the same server id distinct` | Planned |
-| CP-09        | `src/app/__tests__/App.test.tsx`                          | `CP-09 keeps created posts per user across switches` | Planned |
-| CP-10        | `src/features/posts/__tests__/CreatePostForm.test.tsx`    | `CP-10 shows an alert and keeps values on failure`   | Planned |
-| CP-11        | `src/features/posts/__tests__/CreatePostForm.test.tsx`    | `CP-11 does not retry a failed create`               | Planned |
-| CP-02, CP-07 | `e2e/create-post.spec.ts`                                 | `validation blocks submit; valid post appears`       | Planned |
+| ID           | Test file                                              | Test name                                                                     | Status |
+| ------------ | ------------------------------------------------------ | ----------------------------------------------------------------------------- | ------ |
+| CP-01        | `src/features/posts/__tests__/CreatePostForm.test.tsx` | `CP-01 renders title, body and publish`                                       | Done   |
+| CP-02        | `src/features/posts/schemas/createPostForm.test.ts`    | `CP-02 rejects empty and whitespace-only values`                              | Done   |
+| CP-02        | `src/features/posts/__tests__/CreatePostForm.test.tsx` | `CP-02 shows "Title is required" on blur of a whitespace-only title`          | Done   |
+| CP-03        | `src/features/posts/schemas/createPostForm.test.ts`    | `CP-03 enforces max lengths after trimming`                                   | Done   |
+| CP-03        | `src/features/posts/__tests__/CreatePostForm.test.tsx` | `CP-03 shows the max-length error on submit`                                  | Done   |
+| CP-04        | `src/features/posts/__tests__/CreatePostForm.test.tsx` | `CP-04 shows accessible errors on submit and focuses the first invalid field` | Done   |
+| CP-04        | `src/features/posts/__tests__/CreatePostForm.test.tsx` | `CP-04 clears the error as soon as the value is valid`                        | Done   |
+| CP-05        | `src/features/posts/schemas/createPostForm.test.ts`    | `CP-05 outputs trimmed values`                                                | Done   |
+| CP-05, CP-06 | `src/features/posts/__tests__/CreatePostForm.test.tsx` | `CP-05 CP-06 sends trimmed values and disables publish while pending`         | Done   |
+| CP-07        | `src/features/posts/__tests__/PostsPanel.test.tsx`     | `CP-07 shows the new post first with a badge`                                 | Done   |
+| CP-08        | `src/features/posts/__tests__/PostsPanel.test.tsx`     | `CP-08 keeps posts with the same server id distinct`                          | Done   |
+| CP-09        | `src/app/__tests__/App.test.tsx`                       | `CP-09 keeps created posts per user across switches`                          | Done   |
+| CP-10        | `src/features/posts/__tests__/CreatePostForm.test.tsx` | `CP-10 shows an alert and keeps values on failure, then retries on submit`    | Done   |
+| CP-11        | `src/features/posts/__tests__/CreatePostForm.test.tsx` | `CP-11 does not retry a failed create`                                        | Done   |
+| CP-02, CP-07 | `e2e/create-post.spec.ts`                              | `validation blocks submit; valid post appears`                                | Done   |
