@@ -57,6 +57,12 @@ export default defineConfig([
   },
 
   {
+    // Vitest runs with globals disabled, so RTL cannot register its automatic cleanup.
+    files: ['src/test/setup.ts'],
+    rules: { 'testing-library/no-manual-cleanup': 'off' },
+  },
+
+  {
     files: ['**/*.js'],
     extends: [js.configs.recommended],
     languageOptions: {
