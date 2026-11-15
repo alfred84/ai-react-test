@@ -120,3 +120,54 @@ Each entry: **date/step**, **prompt summary**, **what AI produced**, **what I ac
   - Retry: none for 4xx or parse errors, at most 2 for network errors and 5xx, none for mutations.
 - **What I accepted:** `TODO(me)` (review gate at the end of Phase 1).
 - **What I corrected or rejected:** `TODO(me)`
+
+## 2026-11-15 ~12:00 · Phase 2, async states (`feat/async-states`)
+
+- **Prompt summary:** "ok continue": Phase 1 approved, start strict TDD.
+- **What AI produced:** Red, then green commits for the http client and `ApiError` (AS-01..05),
+  error messages (AS-06), the query client retry policy (AS-07), design tokens, `ErrorState`,
+  `EmptyState` and `Button` (AS-09, AS-10), and the error boundary (AS-11).
+- **What I accepted:** `TODO(me)`
+- **Mistakes and corrections during this step (all real):**
+  - The stylistic lint preset demanded `interface`, which contradicted the agreed "types over
+    interfaces" rule. AI set `consistent-type-definitions: type` in a separate `chore` commit.
+  - AI used `queryClient.fetchQuery` in the retry tests. It is deprecated in TanStack Query
+    5.107, so AI switched to `client.query()`.
+  - The 100% coverage gate flagged an unused `isApiError` helper. AI deleted it instead of
+    writing a test for dead code.
+  - AS-11 first said "Reload page" calls `location.reload()`. jsdom can't stub it, and a plain
+    link also works when React state is broken. AI changed the spec first (`docs(spec)` commit)
+    and then implemented a reload link to the current URL.
+  - The coverage gate found an untested branch in `useSearchParam` (removing the last
+    parameter). AI added a real behavior test for it.
+
+## 2026-11-15 ~12:20-12:36 · Phase 2, users, posts and create post
+
+- **Prompt summary:** Continue Phase 2 with the plan's order.
+- **What AI produced:** For each feature, one red commit with all of its acceptance tests, then
+  green commits: users list, search and selection (UL-01..09, AS-08); posts, master-detail
+  layout, URL restore and cancellation (UP-01..09); create post with React Hook Form, Zod,
+  `CreatedPostsProvider` and `local-<uuid>` keys (CP-01..11). It verified the peer ranges of
+  `react-hook-form` 7.92.0 and `@hookform/resolvers` 7.0.6 before installing them.
+- **What I accepted:** `TODO(me)`
+- **Deviations and corrections (all real):**
+  - **Grouped TDD cycles.** To protect the time box, AI wrote all acceptance tests of a feature
+    in one red commit instead of one cycle per task. Every behavior still had a failing test
+    before its code. Recorded in `specs/tasks.md`.
+  - **A test bug found in green.** The "Post published" live region is always mounted, so
+    awaiting it by role resolved before the text appeared. AI changed the assertion to wait for
+    the text and check that it sits in a `role="status"` element. The intent of the test was
+    kept, and the reason is in the commit body.
+  - **Cut:** moving focus to the posts heading on small screens (UP-08 non-functional), the
+    first item of the agreed cut order.
+  - UP-06 is proven at the network level: the MSW handler records that user 1's request signal
+    was aborted.
+
+## 2026-11-15 ~12:37-12:45 · e2e and hardening
+
+- **What AI produced:** Playwright specs with `page.route` mocks built from the same fixtures:
+  search and select, error and retry, mobile back at 360 px, validation and publish, and an axe
+  scan. All passed on the first run with zero axe violations. Then the traceability tables, the
+  full pipeline (lint, format, typecheck, 100% coverage, build, e2e), and the README.
+- **What I accepted:** `TODO(me)`
+- **What I corrected or rejected:** `TODO(me)`
