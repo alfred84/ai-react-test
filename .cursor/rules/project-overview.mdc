@@ -1,0 +1,14 @@
+---
+description: Project overview, stack, commands, language and scope discipline
+alwaysApply: true
+---
+
+# Project overview
+
+- React 19 + TypeScript 6 (strict) + Vite 8 app on JSONPlaceholder: users list with search, the selected user's posts, and a validated create-post form.
+- Stack: Tailwind CSS v4 (`@theme` tokens), TanStack Query v5, React Hook Form + Zod, Vitest + Testing Library + MSW, Playwright + axe. Node 26.
+- Commands: `npm run lint`, `npm run typecheck`, `npm test`, `npm run test:coverage`, `npm run test:e2e`, `npm run build`.
+- **English only** in code, comments, commits, specs and docs.
+- **Scope is fixed** by `specs/constitution.md`. Do not add features, endpoints or dependencies the specs don't require. Put ideas in the README's "What I would do with more time".
+- API behavior comes only from `specs/api-contract.md`. If something isn't there, verify it with a real request before relying on it.
+- Read `AGENTS.md` for the workflow and the definition of done.

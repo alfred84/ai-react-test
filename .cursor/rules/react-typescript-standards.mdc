@@ -1,0 +1,18 @@
+---
+description: React and TypeScript coding standards for application code
+globs: src/**/*.ts,src/**/*.tsx
+alwaysApply: false
+---
+
+# React + TypeScript standards
+
+- Function components only (exception: the error boundary, which must be a class). Named exports. Props typed with a `type` named `<Component>Props`.
+- No `any`, no non-null `!`, no `@ts-ignore`. Narrow `unknown` with Zod or type guards. Prefer union literal types and `as const` objects over `enum`.
+- **Derive, don't sync:** compute values during render from props, state, the query or the URL. No `useEffect` that copies state into state. Use `useEffect` only to synchronize with external systems (timers, subscriptions, focus).
+- No `useMemo`/`useCallback` without a measured or referential reason (for example a dependency of another hook, or a context value).
+- Server state lives in TanStack Query (keys come from the feature's key factory). The URL holds search and selection. Locally created posts live in `CreatedPostsProvider`. Everything else is local state.
+- Components never call `fetch`. They use the feature hooks, which use the `api/` functions, which use `shared/api/httpClient`.
+- Colocate by feature: `src/features/<feature>/{api,components,hooks,schemas,state,__tests__}`. Features don't import each other's internals; `src/app` composes them.
+- Stable keys from ids (`server-<id>`, `local-<uuid>`), never array indexes or content.
+- Avoid prop drilling deeper than two levels. Lift the state to the nearest owner, or use the existing context.
+- Import with the `@/` alias across folders, and relative paths within the same folder.

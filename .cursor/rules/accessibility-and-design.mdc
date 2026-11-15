@@ -1,0 +1,19 @@
+---
+description: Accessibility and visual design rules for UI components and styles
+globs: src/**/*.tsx,src/**/*.css
+alwaysApply: false
+---
+
+# Accessibility and design
+
+- Semantic HTML first: `header`, `main`, `nav`, `section` with `aria-labelledby`, `article`, `ul`/`li`, `button` for actions, `form` and `label`. Use ARIA only when HTML can't express it.
+- Heading hierarchy: one `h1` (the app title), `h2` per panel, `h3` per post.
+- Everything works with the keyboard. Focus is always visible (`focus-visible:` ring tokens) and never removed without a replacement.
+- Every control has a visible label. Errors are linked with `aria-describedby`, invalid inputs have `aria-invalid="true"`.
+- Async status: loading regions have `aria-busy`. Status messages use `role="status"` (polite). Failures use `role="alert"`.
+- Decorative icons and avatars are `aria-hidden="true"`.
+- Color contrast meets WCAG 2.2 AA in light and dark mode. Color is never the only signal (pair it with text or an icon).
+- Respect `prefers-color-scheme` (dark mode via tokens) and `prefers-reduced-motion` (`motion-safe:` for transitions and pulses).
+- Design tokens live in `@theme` in `src/index.css`. Use the token utilities, never hard-coded hex values in components.
+- Responsive from 360 px: master-detail on `md` and up, separate views below.
+- Loading uses skeletons shaped like the content. Empty states have an icon, a title and guidance.

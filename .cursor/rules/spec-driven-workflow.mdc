@@ -1,0 +1,15 @@
+---
+description: Spec-driven development. Use when adding or changing any behavior, tests or specs.
+globs: specs/**,src/**,e2e/**
+alwaysApply: false
+---
+
+# Spec-driven workflow
+
+- **No implementation without a spec.** Every behavior maps to a requirement ID in `specs/features/*.md` (`AS-`, `UL-`, `UP-`, `CP-`) or `specs/api-contract.md` (`API-`).
+- **Specs change first.** If the needed behavior is missing or wrong, update the spec in its own `docs(spec): ...` commit before touching tests or code.
+- IDs are stable: never renumber or reuse them. Strike through dropped requirements and give the reason.
+- Test names start with the ID they prove: `it('UL-03 matches names regardless of accents', ...)`.
+- After implementing, update the spec's **Traceability** table (test file, test name, status) and the task status in `specs/tasks.md`.
+- If reality (API, library) contradicts a spec, stop. Fix the spec with evidence, then continue.
+- Use the `write-spec` skill to author or update specs.

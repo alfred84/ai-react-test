@@ -1,0 +1,18 @@
+---
+description: Testing standards for unit, integration and e2e tests
+globs: **/*.test.ts,**/*.test.tsx,e2e/**,src/test/**
+alwaysApply: false
+---
+
+# Testing standards
+
+- Query like a user, following Testing Library priority: `getByRole` (with `name`), then `getByLabelText`, then `getByText`. `getByTestId` only as a documented last resort.
+- `userEvent` (set up per test) over `fireEvent`. Use `findBy*` for async appearance and `waitFor` only for assertions that can't be expressed with `findBy*`. Never use arbitrary sleeps.
+- Network goes through **MSW** in unit and integration tests (`src/test/msw`), and through Playwright `page.route` in e2e. Unhandled requests fail the test. Override per test with `server.use(...)`. Handlers reset after each test.
+- Fixtures come from `src/test/fixtures/` (real API responses). Derive edge cases in the test so deviations from real data are explicit.
+- Assert behavior and accessibility (roles, names, `aria-*`, focus), not implementation details (state, hooks internals, class names, call counts of internal functions).
+- No snapshot tests for components.
+- Structure each test as Arrange, Act, Assert, separated by blank lines. One behavior per test.
+- Names start with the requirement ID: `it('CP-04 shows accessible errors on blur and submit', ...)`.
+- Fresh `QueryClient` per test (`retry: false` unless testing retries). No shared mutable state between tests. Reset the URL between tests.
+- Fake timers only where time is the behavior (debounce), with `userEvent.setup({ advanceTimers: vi.advanceTimersByTime })`.
