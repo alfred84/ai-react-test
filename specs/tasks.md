@@ -18,14 +18,14 @@ Status values: `todo`, `doing`, `done`, `cut`.
 
 ## Step 1-2: async states (`feat/async-states`)
 
-| Task | IDs       | Description                                      | Commits                                                                            | Status |
-| ---- | --------- | ------------------------------------------------ | ---------------------------------------------------------------------------------- | ------ |
-| T-10 | AS-01..05 | `httpClient` and `ApiError`                      | `test(api): ...http client error mapping`, then `feat(api): add typed http client` | todo   |
-| T-11 | AS-06     | `getErrorMessage`                                | `test(api): ...`, then `feat(api): map api errors to user messages`                | todo   |
-| T-12 | AS-07     | `createQueryClient` with the retry policy        | `test(app): ...`, then `feat(app): add query client with retry policy`             | todo   |
-| T-13 | -         | Design tokens (`@theme`, light and dark)         | `feat(ui): add design tokens and base styles`                                      | todo   |
-| T-14 | AS-08..10 | `Skeleton`, `ErrorState`, `EmptyState`, `Button` | `test(ui): ...`, then `feat(ui): add async state primitives`                       | todo   |
-| T-15 | AS-11     | `AppErrorBoundary` and the providers             | `test(app): ...`, then `feat(app): add error boundary and providers`               | todo   |
+| Task | IDs       | Description                                                                         | Commits                                                                            | Status |
+| ---- | --------- | ----------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ------ |
+| T-10 | AS-01..05 | `httpClient` and `ApiError`                                                         | `test(api): ...http client error mapping`, then `feat(api): add typed http client` | done   |
+| T-11 | AS-06     | `getErrorMessage`                                                                   | `test(api): ...`, then `feat(api): map api errors to user messages`                | done   |
+| T-12 | AS-07     | `createQueryClient` with the retry policy                                           | `test(app): ...`, then `feat(app): add query client with retry policy`             | done   |
+| T-13 | -         | Design tokens (`@theme`, light and dark)                                            | `feat(ui): add design tokens and base styles`                                      | done   |
+| T-14 | AS-08..10 | `ErrorState`, `EmptyState`, `Button` (`Skeleton` moved to T-23 with its AS-08 test) | `test(ui): ...`, then `feat(ui): add async state primitives`                       | done   |
+| T-15 | AS-11     | `AppErrorBoundary` and the providers                                                | `test(app): ...`, then `feat(app): add error boundary and providers`               | done   |
 
 ## Step 3-4: users list (`feat/users-list`)
 
