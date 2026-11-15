@@ -14,7 +14,7 @@ Status values: `todo`, `doing`, `done`, `cut`.
 | T-01 | API contract and real fixtures                          | `test: add fixtures...`, `docs: add api contract...`                                            | done   |
 | T-02 | Specs README, constitution, architecture, feature specs | `docs: ...`                                                                                     | done   |
 | T-03 | Plan and tasks                                          | `docs: add implementation plan and tasks`                                                       | done   |
-| T-04 | AGENTS.md, Cursor rules and skills, AI usage log        | `chore: add agents.md and cursor rules`, `chore: add cursor skills`, `docs: start ai usage log` | doing  |
+| T-04 | AGENTS.md, Cursor rules and skills, AI usage log        | `chore: add agents.md and cursor rules`, `chore: add cursor skills`, `docs: start ai usage log` | done   |
 
 ## Step 1-2: async states (`feat/async-states`)
 

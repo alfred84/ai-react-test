@@ -1,0 +1,15 @@
+---
+description: Test-driven development cycle. Use when implementing any requirement.
+globs: src/**,e2e/**
+alwaysApply: false
+---
+
+# TDD workflow
+
+- **Red → green → refactor**, one behavior (one acceptance criterion) per cycle.
+- **Red:** write the test first, derived from the Given/When/Then. Run it and confirm it fails **for the right reason** (an assertion failure or a missing export, not a typo or a broken setup). Commit `test(<scope>): ...`. The pre-commit hook does not run tests, so red commits are allowed. Lint and typecheck must still pass, so add a minimal stub export if needed.
+- **Green:** write the minimum code to pass, with no speculative generality. Commit `feat(<scope>): ...`.
+- **Refactor:** improve names and structure with tests green. Commit `refactor(<scope>): ...` only if something actually changed. Never mix refactor with behavior change.
+- Never weaken or delete a test to make it pass. If the test is wrong, fix the spec first.
+- Keep coverage at 100% through behavior tests. Remove unreachable code instead of covering it.
+- Use the `tdd-cycle` skill for the exact commands.

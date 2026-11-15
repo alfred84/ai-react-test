@@ -1,0 +1,13 @@
+---
+description: TSDoc and comment standards for source code
+globs: src/**/*.ts,src/**/*.tsx
+alwaysApply: false
+---
+
+# Documentation standards
+
+- Add TSDoc to exported functions, hooks, components and types **when it adds meaning beyond the signature**: what the item does and why, its params, its return value, and `@throws` for thrown error kinds.
+- Document constraints the code can't show: API quirks (`id: 101`, `200 []` for unknown users), cancellation semantics, why a retry is skipped. Link the spec ID when useful (`@see specs/features/create-post.md CP-08`).
+- No noise comments: don't restate the code, narrate steps, describe history ("changed from X"), or write TODOs without an owner.
+- Keep docs in sync. A behavior change updates its TSDoc in the same commit.
+- Specs and the README are the place for decisions and trade-offs, not inline essays.

@@ -1,0 +1,16 @@
+---
+description: Git commit and branching conventions. Use when staging, committing, branching or merging.
+alwaysApply: false
+---
+
+# Git conventions
+
+- Conventional Commits: `type(scope): subject`. Types: `feat`, `fix`, `test`, `refactor`, `docs`, `style`, `chore`, `build`, `ci`, `perf`. Scopes: `api`, `app`, `ui`, `shared`, `users`, `posts`, `e2e`, `spec`.
+- Subject in imperative present tense ("add", not "added"), lowercase, no trailing period, header at most 72 chars. commitlint enforces this.
+- Add a body (wrapped at about 72 cols) when the *why* is not obvious: trade-offs, rejected alternatives, API quirks.
+- **One logical change per commit.** Never mix refactor with behavior change, or formatting with logic.
+- Stage deliberately: `git add <paths>` or `git add -p`, **never `git add .`**. Review `git diff --staged` before committing.
+- Never commit failing lint or typecheck (the pre-commit hook runs both). Red-phase test commits are the only commits allowed to have failing tests.
+- Short-lived branches per phase or feature (`feat/users-list`), merged into `main` with `--no-ff`.
+- Never rewrite, squash or force-push history. Never push without the user's instruction.
+- Use the `atomic-commit` skill for the exact procedure.
