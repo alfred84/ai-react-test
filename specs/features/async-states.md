@@ -19,19 +19,19 @@ only reference them.
 
 ## Functional requirements
 
-| ID    | Requirement                                                                                                                                                     |
-| ----- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| AS-01 | The API client requests `API_BASE_URL + path` with `Accept: application/json`. With a body, it sends JSON with `Content-Type: application/json; charset=UTF-8`. |
-| AS-02 | A rejected `fetch` (not an abort) becomes `ApiError` of kind `network`.                                                                                         |
-| AS-03 | A non-2xx response becomes `ApiError` of kind `http` with its `status`. The body is not parsed.                                                                 |
-| AS-04 | Invalid JSON, or a payload that fails Zod validation, becomes `ApiError` of kind `parse`.                                                                       |
-| AS-05 | An aborted request re-throws the original `AbortError` so queries treat it as a cancellation.                                                                   |
-| AS-06 | `getErrorMessage` maps each error kind, and unknown errors, to the user messages in [architecture](../architecture.md#error-taxonomy).                          |
-| AS-07 | Query retry policy: no retry for 4xx or `parse`. At most 2 retries for `network` and 5xx. Mutations do not retry.                                               |
-| AS-08 | Loading UI: skeleton placeholders shaped like the content, the region marked `aria-busy="true"`, and a visually hidden status text.                             |
-| AS-09 | Error UI: an `ErrorState` with a heading, the mapped message (`role="alert"`) and a "Try again" button that re-runs the failed operation.                       |
-| AS-10 | Empty UI: an `EmptyState` with an icon, a short title and guidance text.                                                                                        |
-| AS-11 | An app-level error boundary renders a fallback with a "Reload" button for unexpected render errors.                                                             |
+| ID    | Requirement                                                                                                                                                                     |
+| ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| AS-01 | The API client requests `API_BASE_URL + path` with `Accept: application/json`. With a body, it sends JSON with `Content-Type: application/json; charset=UTF-8`.                 |
+| AS-02 | A rejected `fetch` (not an abort) becomes `ApiError` of kind `network`.                                                                                                         |
+| AS-03 | A non-2xx response becomes `ApiError` of kind `http` with its `status`. The body is not parsed.                                                                                 |
+| AS-04 | Invalid JSON, or a payload that fails Zod validation, becomes `ApiError` of kind `parse`.                                                                                       |
+| AS-05 | An aborted request re-throws the original `AbortError` so queries treat it as a cancellation.                                                                                   |
+| AS-06 | `getErrorMessage` maps each error kind, and unknown errors, to the user messages in [architecture](../architecture.md#error-taxonomy).                                          |
+| AS-07 | Query retry policy: no retry for 4xx or `parse`. At most 2 retries for `network` and 5xx. Mutations do not retry.                                                               |
+| AS-08 | Loading UI: skeleton placeholders shaped like the content, the region marked `aria-busy="true"`, and a visually hidden status text.                                             |
+| AS-09 | Error UI: an `ErrorState` with a heading, the mapped message (`role="alert"`) and a "Try again" button that re-runs the failed operation.                                       |
+| AS-10 | Empty UI: an `EmptyState` with an icon, a short title and guidance text.                                                                                                        |
+| AS-11 | An app-level error boundary renders a fallback with a "Reload page" link (to the current URL) for unexpected render errors. A plain link works even when React state is broken. |
 
 ## Acceptance criteria
 
@@ -55,7 +55,8 @@ only reference them.
 - **AS-09** Given an error state, when the user activates "Try again" and the request now
   succeeds, then the content replaces the error.
 - **AS-11** Given a component throws during render, when the app renders, then the fallback with
-  "Something went wrong" and a "Reload" button is shown instead of a blank page.
+  "Something went wrong" and a "Reload page" link to the current URL is shown instead of a blank
+  page.
 
 ## Edge cases
 
