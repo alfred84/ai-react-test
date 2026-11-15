@@ -72,14 +72,16 @@ shown, together with any posts created locally in this session
 
 ## Traceability
 
-| ID    | Test file                                          | Test name                                            | Status  |
-| ----- | -------------------------------------------------- | ---------------------------------------------------- | ------- |
-| UP-01 | `src/features/posts/__tests__/PostsPanel.test.tsx` | `UP-01 asks to select a user`                        | Planned |
-| UP-02 | `src/features/posts/__tests__/PostsPanel.test.tsx` | `UP-02 loads posts for the selected user`            | Planned |
-| UP-03 | `src/features/posts/__tests__/PostsPanel.test.tsx` | `UP-03 renders posts as articles with line breaks`   | Planned |
-| UP-04 | `src/features/posts/__tests__/PostsPanel.test.tsx` | `UP-04 shows an empty state when there are no posts` | Planned |
-| UP-05 | `src/features/posts/__tests__/PostsPanel.test.tsx` | `UP-05 shows an error and recovers on retry`         | Planned |
-| UP-06 | `src/app/__tests__/App.test.tsx`                   | `UP-06 cancels stale requests when switching users`  | Planned |
-| UP-07 | `src/app/__tests__/App.test.tsx`                   | `UP-07 restores the selection from the URL`          | Planned |
-| UP-08 | `e2e/users.spec.ts`                                | `mobile back to users`                               | Planned |
-| UP-09 | `src/app/__tests__/App.test.tsx`                   | `UP-09 reuses cached posts when reselecting`         | Planned |
+| ID    | Test file                                          | Test name                                                                                                             | Status   |
+| ----- | -------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | -------- |
+| UP-01 | `src/features/posts/__tests__/PostsPanel.test.tsx` | `UP-01 asks to select a user`                                                                                         | Done     |
+| UP-02 | `src/features/posts/__tests__/PostsPanel.test.tsx` | `UP-02 loads posts for the selected user`                                                                             | Done     |
+| UP-03 | `src/features/posts/__tests__/PostsPanel.test.tsx` | `UP-03 renders posts as articles with line breaks`                                                                    | Done     |
+| UP-04 | `src/features/posts/__tests__/PostsPanel.test.tsx` | `UP-04 shows an empty state when there are no posts`                                                                  | Done     |
+| UP-05 | `src/features/posts/__tests__/PostsPanel.test.tsx` | `UP-05 shows an error and recovers on retry`                                                                          | Done     |
+| UP-06 | `src/app/__tests__/App.test.tsx`                   | `UP-06 cancels stale requests when switching users`                                                                   | Done     |
+| UP-07 | `src/app/__tests__/App.test.tsx`                   | `UP-07 restores the selection from the URL`, `... ignores a non-numeric user parameter`, `... shows "User not found"` | Done     |
+| UP-08 | `src/app/__tests__/App.test.tsx`                   | `UP-08 "Back to users" clears the selection`                                                                          | Done     |
+| UP-08 | `e2e/users.spec.ts`                                | `mobile back to users`                                                                                                | Done     |
+| UP-08 | (none)                                             | Moving focus to the panel heading on small screens (non-functional requirement)                                       | Deferred |
+| UP-09 | `src/app/__tests__/App.test.tsx`                   | `UP-09 reuses cached posts when reselecting`                                                                          | Done     |

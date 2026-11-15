@@ -31,43 +31,53 @@ Status values: `todo`, `doing`, `done`, `cut`.
 
 | Task | IDs          | Description                                | Commits                                                                             | Status |
 | ---- | ------------ | ------------------------------------------ | ----------------------------------------------------------------------------------- | ------ |
-| T-20 | UL-03        | `normalizeText`                            | `test(shared): ...`, then `feat(shared): add accent-insensitive text normalization` | todo   |
-| T-21 | UL-04        | `useDebouncedValue`                        | `test(shared): ...`, then `feat(shared): add debounced value hook`                  | todo   |
-| T-22 | UL-05, UL-08 | `useSearchParam` (URL state)               | `test(shared): ...`, then `feat(shared): add url search param hook`                 | todo   |
-| T-23 | UL-01, UL-09 | Users schema, API, `useUsers`, list render | `test(users): ...`, then `feat(users): load and render users`                       | todo   |
-| T-24 | UL-02..07    | Search, empty results, live count          | `test(users): ...`, then `feat(users): add debounced name search`                   | todo   |
-| T-25 | UL-08        | Selection                                  | `test(users): ...`, then `feat(users): select a user`                               | todo   |
+| T-20 | UL-03        | `normalizeText`                            | `test(shared): ...`, then `feat(shared): add accent-insensitive text normalization` | done   |
+| T-21 | UL-04        | `useDebouncedValue`                        | `test(shared): ...`, then `feat(shared): add debounced value hook`                  | done   |
+| T-22 | UL-05, UL-08 | `useSearchParam` (URL state)               | `test(shared): ...`, then `feat(shared): add url search param hook`                 | done   |
+| T-23 | UL-01, UL-09 | Users schema, API, `useUsers`, list render | `test(users): ...`, then `feat(users): load and render users`                       | done   |
+| T-24 | UL-02..07    | Search, empty results, live count          | `test(users): ...`, then `feat(users): add debounced name search`                   | done   |
+| T-25 | UL-08        | Selection                                  | `test(users): ...`, then `feat(users): select a user`                               | done   |
 
 ## Step 5-6: user posts (`feat/user-posts`)
 
 | Task | IDs                 | Description                                       | Commits                                                                 | Status |
 | ---- | ------------------- | ------------------------------------------------- | ----------------------------------------------------------------------- | ------ |
-| T-30 | UP-01..05           | Posts schema, API, `usePosts`, `PostsPanel`       | `test(posts): ...`, then `feat(posts): show posts of the selected user` | todo   |
-| T-31 | UP-06, UP-07, UP-09 | App integration: cancellation, URL restore, cache | `test(app): ...`, then `feat(app): compose master-detail layout`        | todo   |
-| T-32 | UP-08               | Responsive layout and back to users               | `test(app): ...`, then `feat(app): add mobile back navigation`          | todo   |
+| T-30 | UP-01..05           | Posts schema, API, `usePosts`, `PostsPanel`       | `test(posts): ...`, then `feat(posts): show posts of the selected user` | done   |
+| T-31 | UP-06, UP-07, UP-09 | App integration: cancellation, URL restore, cache | `test(app): ...`, then `feat(app): compose master-detail layout`        | done   |
+| T-32 | UP-08               | Responsive layout and back to users               | `test(app): ...`, then `feat(app): add mobile back navigation`          | done   |
 
 ## Step 7-8: create post (`feat/create-post`)
 
 | Task | IDs                   | Description                                    | Commits                                                                | Status |
 | ---- | --------------------- | ---------------------------------------------- | ---------------------------------------------------------------------- | ------ |
-| T-40 | CP-02, CP-03          | `createPostFormSchema`                         | `test(posts): ...`, then `feat(posts): add create post form schema`    | todo   |
-| T-41 | CP-08, CP-09          | `CreatedPostsProvider` and merge in `usePosts` | `test(posts): ...`, then `feat(posts): store created posts per user`   | todo   |
-| T-42 | CP-01, 04..07, 10, 11 | `useCreatePost`, `CreatePostForm`              | `test(posts): ...`, then `feat(posts): add validated create post form` | todo   |
+| T-40 | CP-02, CP-03          | `createPostFormSchema`                         | `test(posts): ...`, then `feat(posts): add create post form schema`    | done   |
+| T-41 | CP-08, CP-09          | `CreatedPostsProvider` and merge in `usePosts` | `test(posts): ...`, then `feat(posts): store created posts per user`   | done   |
+| T-42 | CP-01, 04..07, 10, 11 | `useCreatePost`, `CreatePostForm`              | `test(posts): ...`, then `feat(posts): add validated create post form` | done   |
 
 ## Step 9: e2e (`test/e2e`)
 
 | Task | IDs                 | Description                            | Commits                                    | Status |
 | ---- | ------------------- | -------------------------------------- | ------------------------------------------ | ------ |
-| T-50 | UL-02, UL-08, UP-08 | Search and select, mobile back         | `test(e2e): add search and select journey` | todo   |
-| T-51 | CP-02, CP-07        | Validation blocks submit, post appears | `test(e2e): add create post journey`       | todo   |
-| T-52 | AS-09               | Error state with retry                 | `test(e2e): add error and retry journey`   | todo   |
-| T-53 | NFR                 | axe on main screens                    | `test(e2e): add axe accessibility checks`  | todo   |
+| T-50 | UL-02, UL-08, UP-08 | Search and select, mobile back         | `test(e2e): add search and select journey` | done   |
+| T-51 | CP-02, CP-07        | Validation blocks submit, post appears | `test(e2e): add create post journey`       | done   |
+| T-52 | AS-09               | Error state with retry                 | `test(e2e): add error and retry journey`   | done   |
+| T-53 | NFR                 | axe on main screens                    | `test(e2e): add axe accessibility checks`  | done   |
 
 ## Step 10: hardening and docs (`docs/final`)
 
 | Task | Description                                  | Commits                            | Status |
 | ---- | -------------------------------------------- | ---------------------------------- | ------ |
-| T-60 | Full pipeline, bundle size, quick a11y fixes | `fix: ...` / `perf: ...` as needed | todo   |
-| T-61 | TSDoc on exported APIs                       | `docs: add tsdoc to exported apis` | todo   |
-| T-62 | README                                       | `docs: complete readme`            | todo   |
-| T-63 | AI usage log final pass, tag `v1.0.0`        | `docs: finalize ai usage log`      | todo   |
+| T-60 | Full pipeline, bundle size, quick a11y fixes | `fix: ...` / `perf: ...` as needed | done   |
+| T-61 | TSDoc on exported APIs                       | `docs: add tsdoc to exported apis` | done   |
+| T-62 | README                                       | `docs: complete readme`            | done   |
+| T-63 | AI usage log final pass, tag `v1.0.0`        | `docs: finalize ai usage log`      | done   |
+
+## Delivery notes
+
+- To protect the 3-hour box, each feature was delivered as one red commit (all of its acceptance
+  tests) followed by one or two green commits, instead of one cycle per task row. Every behavior
+  still had a failing test before its code.
+- The four e2e journeys (T-50..53) landed in one commit, in e2e/users.spec.ts and
+  e2e/create-post.spec.ts.
+- Cut: moving focus to the posts heading on small screens (UP-08 non-functional requirement),
+  the first item of the cut order in [plan](plan.md).

@@ -74,16 +74,19 @@ name, and lets them pick one to see their posts.
 
 ## Traceability
 
-| ID           | Test file                                          | Test name                                             | Status  |
-| ------------ | -------------------------------------------------- | ----------------------------------------------------- | ------- |
-| UL-01        | `src/features/users/__tests__/UsersPanel.test.tsx` | `UL-01 renders users with avatar initials and email`  | Planned |
-| UL-02        | `src/features/users/__tests__/UsersPanel.test.tsx` | `UL-02 filters by name ignoring case`                 | Planned |
-| UL-03        | `src/shared/lib/normalizeText.test.ts`             | `UL-03 removes diacritics, case and extra whitespace` | Planned |
-| UL-03        | `src/features/users/__tests__/UsersPanel.test.tsx` | `UL-03 matches names regardless of accents`           | Planned |
-| UL-04        | `src/shared/lib/useDebouncedValue.test.ts`         | `UL-04 updates only after the delay`                  | Planned |
-| UL-05        | `src/features/users/__tests__/UsersPanel.test.tsx` | `UL-05 syncs the search with the q parameter`         | Planned |
-| UL-06        | `src/features/users/__tests__/UsersPanel.test.tsx` | `UL-06 shows an empty state with clear search`        | Planned |
-| UL-07        | `src/features/users/__tests__/UsersPanel.test.tsx` | `UL-07 announces the result count`                    | Planned |
-| UL-08        | `src/features/users/__tests__/UsersPanel.test.tsx` | `UL-08 selects a user and marks it current`           | Planned |
-| UL-09        | `src/features/users/__tests__/UsersPanel.test.tsx` | `UL-09 shows an error and recovers on retry`          | Planned |
-| UL-02, UL-08 | `e2e/users.spec.ts`                                | `search and select a user`                            | Planned |
+| ID           | Test file                                          | Test name                                                                                                            | Status |
+| ------------ | -------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | ------ |
+| UL-01        | `src/features/users/__tests__/UsersPanel.test.tsx` | `UL-01 renders users with avatar initials and email`                                                                 | Done   |
+| UL-02        | `src/features/users/__tests__/UsersPanel.test.tsx` | `UL-02 filters by name ignoring case`                                                                                | Done   |
+| UL-03        | `src/shared/lib/normalizeText.test.ts`             | `UL-03 removes diacritics, case and extra whitespace: %j`                                                            | Done   |
+| UL-03        | `src/features/users/__tests__/UsersPanel.test.tsx` | `UL-03 matches names regardless of accents`                                                                          | Done   |
+| UL-04        | `src/shared/lib/useDebouncedValue.test.ts`         | `UL-04 updates only after the delay`, `UL-04 restarts the delay on every change`                                     | Done   |
+| UL-05        | `src/shared/lib/useSearchParam.test.ts`            | `UL-05 reads the initial value from the URL`, `... writes and removes the parameter, ...`, `... leaves a clean path` | Done   |
+| UL-05        | `src/features/users/__tests__/UsersPanel.test.tsx` | `UL-05 initializes the search from the q parameter and syncs changes back`, `UL-05 stores the trimmed search`        | Done   |
+| UL-06        | `src/features/users/__tests__/UsersPanel.test.tsx` | `UL-06 shows an empty state with clear search`                                                                       | Done   |
+| UL-07        | `src/features/users/__tests__/UsersPanel.test.tsx` | `UL-07 announces the result count in a polite live region`                                                           | Done   |
+| UL-08        | `src/features/users/__tests__/UsersPanel.test.tsx` | `UL-08 selects a user and marks it current`                                                                          | Done   |
+| UL-08        | `src/shared/lib/useSearchParam.test.ts`            | `UL-08 keeps every hook instance in sync and follows history navigation`                                             | Done   |
+| UL-09        | `src/features/users/__tests__/UsersPanel.test.tsx` | `UL-09 shows an error and recovers on retry`                                                                         | Done   |
+| UL-02, UL-08 | `e2e/users.spec.ts`                                | `search and select a user`                                                                                           | Done   |
+| UL-09        | `e2e/users.spec.ts`                                | `users error state recovers on retry`                                                                                | Done   |
