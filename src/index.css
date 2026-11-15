@@ -1,3 +1,10 @@
-:root {
-  font-family: system-ui, sans-serif;
+@import 'tailwindcss';
+@import '@fontsource-variable/inter';
+
+/*
+ * Design tokens. Minimal baseline; the full palette, radius and
+ * dark-mode surfaces are defined alongside the UI primitives.
+ */
+@theme {
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
 }
