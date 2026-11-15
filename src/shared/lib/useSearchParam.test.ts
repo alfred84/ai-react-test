@@ -29,6 +29,17 @@ describe('useSearchParam', () => {
     expect(window.location.search).toBe('?user=2')
   })
 
+  it('UL-05 leaves a clean path when the last parameter is removed', () => {
+    window.history.replaceState(null, '', '/?q=leanne')
+    const { result } = renderHook(() => useSearchParam('q'))
+
+    act(() => {
+      result.current[1]('')
+    })
+
+    expect(window.location.pathname + window.location.search).toBe('/')
+  })
+
   it('UL-08 keeps every hook instance in sync and follows history navigation', () => {
     window.history.replaceState(null, '', '/')
     const { result: writer } = renderHook(() => useSearchParam('user'))
