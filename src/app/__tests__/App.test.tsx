@@ -118,4 +118,22 @@ describe('App', () => {
     expect(screen.getByRole('heading', { level: 3, name: firstPostUser1?.title })).toBeVisible()
     expect(postRequests).toBe(2)
   })
+
+  it('CP-09 keeps created posts per user across switches', async () => {
+    const { user } = renderApp('/?user=1')
+    await screen.findByRole('heading', { level: 3, name: firstPostUser1?.title })
+    await user.type(screen.getByRole('textbox', { name: 'Title' }), 'Mine')
+    await user.type(screen.getByRole('textbox', { name: 'Body' }), 'Text')
+    await user.click(screen.getByRole('button', { name: 'Publish' }))
+    await screen.findByRole('heading', { level: 3, name: 'Mine' })
+
+    await user.click(screen.getByRole('button', { name: /Ervin Howell/ }))
+    await screen.findByRole('heading', { level: 3, name: firstPostUser2?.title })
+    const mineOnErvin = screen.queryByRole('heading', { level: 3, name: 'Mine' })
+    await user.click(screen.getByRole('button', { name: /Leanne Graham/ }))
+
+    expect(mineOnErvin).not.toBeInTheDocument()
+    const [firstArticle] = await screen.findAllByRole('article')
+    expect(firstArticle).toHaveTextContent('Mine')
+  })
 })

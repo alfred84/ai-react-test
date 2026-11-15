@@ -1,6 +1,7 @@
 import { screen, within } from '@testing-library/react'
+import type { UserEvent } from '@testing-library/user-event'
 import { http, HttpResponse } from 'msw'
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 
 import { API_BASE_URL } from '@/shared/api/config'
 import postsUser1 from '@/test/fixtures/posts-user-1.json'
@@ -72,4 +73,42 @@ describe('PostsPanel', () => {
 
     expect(await screen.findAllByRole('article')).toHaveLength(10)
   })
+
+  it('CP-07 shows the new post first with a badge', async () => {
+    const { user } = renderWithProviders(<PostsPanel user={LEANNE} />)
+    await screen.findAllByRole('article')
+
+    await publish(user, 'Hello', 'World')
+
+    expect(await screen.findByRole('status')).toHaveTextContent('Post published')
+    const [firstArticle] = screen.getAllByRole('article')
+    if (!firstArticle) throw new Error('expected a first post')
+    expect(within(firstArticle).getByRole('heading', { level: 3, name: 'Hello' })).toBeVisible()
+    expect(within(firstArticle).getByText('New')).toBeVisible()
+    expect(screen.getAllByRole('article')).toHaveLength(11)
+  })
+
+  it('CP-08 keeps posts with the same server id distinct', async () => {
+    const consoleError = vi.spyOn(console, 'error')
+    const { user } = renderWithProviders(<PostsPanel user={LEANNE} />)
+    await screen.findAllByRole('article')
+
+    await publish(user, 'First', 'One')
+    await screen.findByRole('heading', { level: 3, name: 'First' })
+    await publish(user, 'Second', 'Two')
+    await screen.findByRole('heading', { level: 3, name: 'Second' })
+
+    const titles = screen
+      .getAllByRole('article')
+      .slice(0, 2)
+      .map((article) => within(article).getByRole('heading', { level: 3 }).textContent)
+    expect(titles).toEqual(['Second', 'First'])
+    expect(consoleError).not.toHaveBeenCalled()
+  })
 })
+
+async function publish(user: UserEvent, title: string, body: string) {
+  await user.type(screen.getByRole('textbox', { name: 'Title' }), title)
+  await user.type(screen.getByRole('textbox', { name: 'Body' }), body)
+  await user.click(screen.getByRole('button', { name: 'Publish' }))
+}

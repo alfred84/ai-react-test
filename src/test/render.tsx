@@ -4,6 +4,7 @@ import userEvent from '@testing-library/user-event'
 import type { ReactElement } from 'react'
 
 import { createQueryClient } from '@/app/queryClient'
+import { CreatedPostsProvider } from '@/features/posts/state/CreatedPostsProvider'
 
 /** Fresh QueryClient per test with the app defaults, but without retries. */
 export function createTestQueryClient() {
@@ -15,12 +16,17 @@ export function createTestQueryClient() {
   return client
 }
 
-/** Renders `ui` inside the app providers and returns a ready `userEvent` instance. */
+/** Renders `ui` inside the app providers (query client and created posts) and returns a ready `userEvent` instance. */
 export function renderWithProviders(ui: ReactElement, options?: RenderOptions) {
   const client = createTestQueryClient()
   return {
     client,
     user: userEvent.setup(),
-    ...render(<QueryClientProvider client={client}>{ui}</QueryClientProvider>, options),
+    ...render(
+      <QueryClientProvider client={client}>
+        <CreatedPostsProvider>{ui}</CreatedPostsProvider>
+      </QueryClientProvider>,
+      options,
+    ),
   }
 }
