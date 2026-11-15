@@ -1,6 +1,8 @@
 import { QueryClientProvider } from '@tanstack/react-query'
 import { useState } from 'react'
 
+import { UsersPanel } from '@/features/users/components/UsersPanel'
+
 import { AppErrorBoundary } from './AppErrorBoundary'
 import { createQueryClient } from './queryClient'
 
@@ -10,9 +12,16 @@ function App() {
   return (
     <AppErrorBoundary>
       <QueryClientProvider client={queryClient}>
-        <main className="min-h-dvh p-6">
-          <h1 className="text-2xl font-semibold tracking-tight">Users and Posts</h1>
-        </main>
+        <div className="min-h-dvh">
+          <header className="border-b border-border bg-surface">
+            <div className="mx-auto max-w-6xl px-4 py-4">
+              <h1 className="text-2xl font-semibold tracking-tight">Users and Posts</h1>
+            </div>
+          </header>
+          <main className="mx-auto grid max-w-6xl gap-4 p-4 md:grid-cols-[20rem_1fr]">
+            <UsersPanel />
+          </main>
+        </div>
       </QueryClientProvider>
     </AppErrorBoundary>
   )
