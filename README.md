@@ -183,11 +183,10 @@ dated record is in [docs/ai-usage-log.md](docs/ai-usage-log.md). In summary:
   per feature, and atomic commits I could review.
 - **What I accepted:** the stack choices backed by `npm view` evidence (TypeScript 6.0.3 and
   ESLint 9 because of peer ranges), the created-posts design (client-only store with `local-<uuid>`
-  keys), URL state without a router, and the retry policy. `TODO(me)`: add my own review notes.
+  keys), URL state without a router, and the retry policy.
 - **What I corrected or redirected:** I moved the baseline to Node 26 and required an `engines`
   check of every package. I limited the API scope to three endpoints with https only and a
   versioned contract. I chose to soft-reset one broken commit (empty message) and recommit it.
-  `TODO(me)`: add anything else I changed during review.
 - **Where AI corrected itself:** its own mistakes were caught by the toolchain, not by luck.
   Typecheck caught the MSW 3 option rename and the `nodenext` extensions. Lint caught a deprecated
   TanStack Query API. The coverage gate caught dead code and an untested branch. A test bug was
@@ -205,6 +204,7 @@ dated record is in [docs/ai-usage-log.md](docs/ai-usage-log.md). In summary:
   `typescript-eslint` supports it.
 - Edit and delete posts (`PUT`/`PATCH`/`DELETE /posts/:id`) and post comments
   (`/posts/:id/comments`). These are intentionally out of scope; see `specs/api-contract.md`.
+- Implementing clean architecture (not necessary since it's a small project) to better showcase my skills in developing scalable applications.
 
 ## Known limitations
 
